@@ -1,0 +1,74 @@
+#!/bin/bash
+
+# Script for the creation and update of password of a created user in the nginx host webpage
+
+#logic for the script_3 and the respective function call needed
+script_main() {
+    htpasswd -b /etc/nginx/.htpasswd "${USER}" "${PASSWORD}"
+}
+
+#usage of the command with the corresponding options or arguments
+usage() {
+    echo "usage: script_3 [[[-u user ] [-p password ] [-i]] | [-h]]"
+}
+
+##### Main
+
+interactive=
+USER=
+PASSWORD=
+
+while [ "$1" != "" ]; do
+    case $1 in
+    -u | --user)
+        shift
+        USER=$1
+        ;;
+    -p | --password)
+        shift
+        PASSWORD=$1
+        ;;
+    -i | --interactive)
+        interactive=1
+        ;;
+    -h | --help)
+        usage
+        exit
+        ;;
+    *)
+        usage
+        exit 1
+        ;;
+    esac
+    shift
+done
+
+# Test code to verify command line processing
+
+if [ "$interactive" = "1" ]; then
+
+    response=
+    response_equal=
+    read -p "Enter name of user [$USER] > " response
+    if [ -n "$response" ]; then
+        USER="$response"
+    fi
+    read -p "Enter password [$PASSWORD] > " response
+    read -p "Enter the same password [$PASSWORD] > " response_equal
+    if [ -n "$response" ]; then
+        if [ -n "$response_equal" ]; then
+            if [ "$response" == "$response_equal" ]; then
+                PASSWORD="$response"
+                script_main
+                clear
+            fi
+        fi
+    fi
+fi
+if [[ -n "${USER}" && -n "${PASSWORD}" && "$interactive" != "1" ]]; then
+    script_main
+    clear
+else 
+    echo "parameters needed not found"
+fi
+
