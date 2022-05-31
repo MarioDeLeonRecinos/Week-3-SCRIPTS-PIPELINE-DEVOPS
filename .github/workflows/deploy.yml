@@ -12,10 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Update theme
-        # (Optional)If you have the theme added as submodule, you can pull it and use the most updated version
-        run: git submodule update --init --recursive
-
       - name: SSH conection add privileges
         uses: appleboy/ssh-action@master
         with:
@@ -24,6 +20,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             rm -r /home/mdeleon/scripts
+            mkdir /home/mdeleon/scripts
 
       - name: Rsync Deployments Action
         uses: Burnett01/rsync-deployments@5.2
