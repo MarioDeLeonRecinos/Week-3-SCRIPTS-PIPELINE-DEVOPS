@@ -1,0 +1,46 @@
+name: deploy
+on:
+  push:
+    branches:
+      - main
+      - master
+  schedule:
+    - cron: '0 0 * * *' # Everyday at 12am
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Update theme
+        # (Optional)If you have the theme added as submodule, you can pull it and use the most updated version
+        run: git submodule update --init --recursive
+
+      - name: Hugo setup
+        uses: peaceiris/actions-hugo@v2.4.13
+        with:
+          hugo-version: "0.99.1"
+
+      - name: Build
+        run: hugo -D
+
+      - name: SSH conection
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST_IP }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /home/mdeleon/
+            rm -r public/
+            mkdir public
+
+      - name: Rsync Deployments Action
+        uses: Burnett01/rsync-deployments@5.2
+        with:
+          switches: -avz
+          path: ./
+          remote_path: /home/mdeleon/scripts
+          remote_host: ${{ secrets.SSH_HOST_IP }}
+          remote_user: ${{ secrets.SSH_USER }}
+          remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
