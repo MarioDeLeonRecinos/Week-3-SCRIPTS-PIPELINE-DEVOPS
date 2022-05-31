@@ -16,24 +16,14 @@ jobs:
         # (Optional)If you have the theme added as submodule, you can pull it and use the most updated version
         run: git submodule update --init --recursive
 
-      - name: Hugo setup
-        uses: peaceiris/actions-hugo@v2.4.13
-        with:
-          hugo-version: "0.99.1"
-
-      - name: Build
-        run: hugo -D
-
-      - name: SSH conection
+      - name: SSH conection add privileges
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST_IP }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /home/mdeleon/
-            rm -r public/
-            mkdir public
+            rm -r /home/mdeleon/scripts
 
       - name: Rsync Deployments Action
         uses: Burnett01/rsync-deployments@5.2
@@ -44,3 +34,14 @@ jobs:
           remote_host: ${{ secrets.SSH_HOST_IP }}
           remote_user: ${{ secrets.SSH_USER }}
           remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: SSH conection add privileges
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST_IP }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            ls-l
+            chmod -R 755 /home/mdeleon/scripts
+            ls -l
