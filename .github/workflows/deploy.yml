@@ -20,6 +20,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             rm -r /home/mdeleon/scripts
+            mkdir /home/mdeleon/scripts
 
       - name: Rsync Deployments Action
         uses: Burnett01/rsync-deployments@5.2
