@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: SSH conection add privileges
+      - name: SSH conection remove directory and remake it
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST_IP }}
@@ -26,8 +26,8 @@ jobs:
         uses: Burnett01/rsync-deployments@5.2
         with:
           switches: -avz
-          path: ./
-          remote_path: /home/mdeleon/scripts
+          path: ./scripts
+          remote_path: /home/mdeleon/
           remote_host: ${{ secrets.SSH_HOST_IP }}
           remote_user: ${{ secrets.SSH_USER }}
           remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
