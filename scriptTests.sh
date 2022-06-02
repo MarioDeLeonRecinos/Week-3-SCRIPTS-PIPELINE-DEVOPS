@@ -15,7 +15,7 @@ testFirstScript() {
 }
 
 testSecondScript() {
-    $("${FULLPATH}"/tests/script_3_test -u user1 user1)
+    $("${FULLPATH}"/tests/script_3_test -u user1 -p user1)
     #"${FULLPATH}"/Week-3-SCRIPTS-PIPELINE-DEVOPS/scripts/script_2
     EXITCODE=$(echo $?)
     assertEquals "${EXITCODE}" "0"
