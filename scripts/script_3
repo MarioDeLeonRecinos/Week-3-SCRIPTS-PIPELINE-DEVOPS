@@ -4,12 +4,16 @@
 
 #logic for the script_3 and the respective function call needed
 script_main() {
-    htpasswd -b /etc/nginx/.htpasswd "${USER}" "${PASSWORD}"
+    if [ "$CREATE" = "0" ]; then
+        htpasswd -b /etc/nginx/.htpasswd "${USER}" "${PASSWORD}"
+    else
+        htpasswd -D /etc/nginx/.htpasswd "${USER}"
+    fi
 }
 
 #usage of the command with the corresponding options or arguments
 usage() {
-    echo "usage: script_3 [[[-u user ] [-p password ] [-i]] | [-h]]"
+    echo "usage: script_3 [[[-u user ] [-p password ]]| [-i] | [-d user] | [-h]]"
 }
 
 ##### Main
@@ -17,6 +21,7 @@ usage() {
 interactive=
 USER=
 PASSWORD=
+CREATE=0
 
 while [ "$1" != "" ]; do
     case $1 in
@@ -27,6 +32,10 @@ while [ "$1" != "" ]; do
     -p | --password)
         shift
         PASSWORD=$1
+        ;;
+    -d | --delete)
+        shift
+        CREATE=1
         ;;
     -i | --interactive)
         interactive=1
@@ -68,7 +77,8 @@ fi
 if [[ -n "${USER}" && -n "${PASSWORD}" && "$interactive" != "1" ]]; then
     script_main
     clear
-else 
+elif [[ -n "${USER}" && "$CREATE" = "1" ]]; then
+    script_main
+else
     echo "parameters needed not found"
 fi
-

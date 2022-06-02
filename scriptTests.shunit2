@@ -1,0 +1,5 @@
+testFirstScript() {
+    ./scripts/script_2
+    EXITCODE=echo $?
+    assertEquals "${EXITCODE}" "0"
+}
