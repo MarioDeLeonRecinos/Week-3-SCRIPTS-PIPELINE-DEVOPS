@@ -6,11 +6,9 @@
 script_main() {
     if [ "$CREATE" = "0" ]; then
         #Tested in the run htpasswd and works but in test command not found
-        #htpasswd -b ".htpasswd" "${USER}" "${PASSWORD}"
-        ls
+        htpasswd -b ".htpasswd" "${USER}" "${PASSWORD}"
     else
-        #htpasswd -D ".htpasswd" "${USER}"
-        ls
+        htpasswd -D ".htpasswd" "${USER}"
     fi
 }
 
