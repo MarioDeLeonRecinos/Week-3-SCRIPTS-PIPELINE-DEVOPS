@@ -11,11 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      
-      - name: Generate Shell Script Unit Testing
-        uses: sudo-bot/action-shunit2@latest
-        with:
-          cli: "./scriptTests.sh"
 
       - name: SSH conection remove directory and remake it
         uses: appleboy/ssh-action@master
@@ -45,5 +40,5 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             ls-l
-            chmod -R 755 /home/mdeleon/scripts
+            chmod -R 777 /home/mdeleon/scripts
             ls -l

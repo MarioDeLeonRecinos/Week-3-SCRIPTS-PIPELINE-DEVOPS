@@ -1,0 +1,90 @@
+#!/bin/bash
+
+# Script for the backup of files from a directory with the date format yyyy-mm-dd hh:ss:mm in the destination /tmp/backup_script2
+
+#File name and directory with the txt saved for the names of the files to backup
+filename="prueba.txt"
+
+#script used to make the backup automatic when there is a cron call
+script_main_automatic() {
+    DESTINATION="/tmp/backup_script2"    
+    while read line; do
+        ORIGIN="$(dirname "${line}")"
+        FILE="$(basename "${line}")"
+        date=$(date '+%Y-%m-%d %H:%M:%S')
+        mkdir -p "${DESTINATION}/${FILE}_${date}"
+        cp "${ORIGIN}/${FILE}" "${DESTINATION}/${FILE}_${date}/${FILE}"
+    done <$filename
+}
+
+#script for the adition of a new file name to backup
+script_main_add_file_backup(){
+    echo -en "${directory}\n" >> $filename
+}
+
+#usage of the command with the corresponding options or arguments
+usage() {
+    echo "usage: script_2 [[[-d directory ] [-i]] | [-h]]"
+}
+
+##### Main
+
+automatic=0
+interactive=
+directory=$HOME
+
+while [ "$1" != "" ]; do
+    case $1 in
+    -d | --directory)
+        shift
+        directory=$1
+        automatic=1
+        ;;
+    -i | --interactive)
+        interactive=1
+        automatic=1
+        ;;
+    -h | --help)
+        usage
+        automatic=2
+        exit
+        ;;
+    *)
+        usage
+        automatic=2
+        exit 1
+        ;;
+    esac
+    shift
+done
+
+# Test code to verify command line processing
+
+if [ "$interactive" = "1" ]; then
+
+    response=
+
+    read -p "Enter name of directory [$directory] > " response
+    if [ -n "$response" ]; then
+        directory="$response"
+    fi
+
+    if [ -f $directory ]; then
+        echo -n "Output file exists. Overwrite? (y/n) > "
+        read response
+        if [ "$directory" != "y" ]; then
+            echo "Exiting program."
+            exit 1
+        fi
+    fi
+fi
+
+#Validation of the script to call for the automatic process of the backup
+if [ "$automatic" = "0" ]; then
+    script_main_automatic
+elif [ "$automatic" = "1" ]; then
+    script_main_add_file_backup
+fi
+
+#example use for the addition of the cron task in crontab -e
+#43 16 * * * /home/mario/github/Week-2-DEVOPS/script_2 > /dev/null 2>&1

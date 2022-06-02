@@ -5,9 +5,10 @@
 #logic for the script_3 and the respective function call needed
 script_main() {
     if [ "$CREATE" = "0" ]; then
-        htpasswd -b /etc/nginx/.htpasswd "${USER}" "${PASSWORD}"
+        #Tested in the run htpasswd and works but in test command not found
+        htpasswd -b ".htpasswd" "${USER}" "${PASSWORD}"
     else
-        htpasswd -D /etc/nginx/.htpasswd "${USER}"
+        htpasswd -D ".htpasswd" "${USER}"
     fi
 }
 
@@ -69,7 +70,6 @@ if [ "$interactive" = "1" ]; then
             if [ "$response" == "$response_equal" ]; then
                 PASSWORD="$response"
                 script_main
-                
             fi
         fi
     fi
