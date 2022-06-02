@@ -69,14 +69,13 @@ if [ "$interactive" = "1" ]; then
             if [ "$response" == "$response_equal" ]; then
                 PASSWORD="$response"
                 script_main
-                clear
+                
             fi
         fi
     fi
 fi
 if [[ -n "${USER}" && -n "${PASSWORD}" && "$interactive" != "1" ]]; then
     script_main
-    clear
 elif [[ -n "${USER}" && "$CREATE" = "1" ]]; then
     script_main
 else
