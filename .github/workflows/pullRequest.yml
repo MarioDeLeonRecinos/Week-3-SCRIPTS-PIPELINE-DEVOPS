@@ -17,7 +17,7 @@ jobs:
         touch prueba.txt
         touch ".htpasswd"
         chmod 777 prueba.txt ".htpasswd"
-        htpasswd -b ".htpasswd" "user1" "user1"
+        sudo htpasswd -b ".htpasswd" "user1" "user1"
     
     - name: Generate Shell Script Unit Testing
       uses: sudo-bot/action-shunit2@latest
