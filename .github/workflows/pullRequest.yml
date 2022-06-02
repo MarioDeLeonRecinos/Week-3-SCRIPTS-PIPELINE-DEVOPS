@@ -20,7 +20,7 @@ jobs:
         chmod 777 ".htpasswd"
         #sudo htpasswd -b ".htpasswd" "user1" "user1"
     
-    - name: Generate Shell Script Unit Testing First Script
+    - name: Generate Shell Script Unit Testing Scripts
       uses: sudo-bot/action-shunit2@latest
       with:
         cli: "./scriptTests.sh"
