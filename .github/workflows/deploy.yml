@@ -11,6 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      
+      - name: Generate Shell Script Unit Testing
+        uses: sudo-bot/action-shunit2@latest
+        with:
+          cli: "./scriptTests.sh"
 
       - name: SSH conection remove directory and remake it
         uses: appleboy/ssh-action@master
@@ -31,13 +36,6 @@ jobs:
           remote_host: ${{ secrets.SSH_HOST_IP }}
           remote_user: ${{ secrets.SSH_USER }}
           remote_key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Generate Shell Script Unit Testing
-        uses: vargiuscuola/gen-sh-unittest@v1.0
-        id: action-gen-sh-unittest
-
-      - name: gensh-unittest result
-        run: echo "The result of gensh-unittest Action was ${{ steps.action-gen-sh-unittest.outputs.result }}"
 
       - name: SSH conection add privileges
         uses: appleboy/ssh-action@master
