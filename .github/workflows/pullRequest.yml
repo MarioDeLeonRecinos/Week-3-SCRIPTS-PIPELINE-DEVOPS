@@ -16,8 +16,8 @@ jobs:
       run: |
         touch prueba.txt
         touch ".htpasswd"
-        sudo apt install apache2-utils
         chmod 777 prueba.txt ".htpasswd"
+        htpasswd -b ".htpasswd" "user1" "user1"
     
     - name: Generate Shell Script Unit Testing
       uses: sudo-bot/action-shunit2@latest
