@@ -4,7 +4,8 @@ FULLPATH=$(pwd)
 echo ${FULLPATH}
 
 testFirstScript() {
-    "${FULLPATH}"/Week-3-SCRIPTS-PIPELINE-DEVOPS/scripts/script_2
+    "${FULLPATH}"/scripts/script_2
+    #"${FULLPATH}"/Week-3-SCRIPTS-PIPELINE-DEVOPS/scripts/script_2
     EXITCODE=$(echo $?)
     assertEquals "${EXITCODE}" "0"
 }
