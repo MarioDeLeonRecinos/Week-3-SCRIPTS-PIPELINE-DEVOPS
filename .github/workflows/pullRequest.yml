@@ -20,10 +20,15 @@ jobs:
         chmod 777 ".htpasswd"
         #sudo htpasswd -b ".htpasswd" "user1" "user1"
     
-    - name: Generate Shell Script Unit Testing
+    - name: Generate Shell Script Unit Testing First Script
       uses: sudo-bot/action-shunit2@latest
       with:
-        cli: "./scriptTests.sh"
+        cli: "./firstScriptTest.sh"
+    
+    - name: Generate Shell Script Unit Testing Second Script
+      uses: sudo-bot/action-shunit2@latest
+      with:
+        cli: "./secondScriptTest.sh"
 
     - uses: repo-sync/pull-request@v2
       name: pull-request

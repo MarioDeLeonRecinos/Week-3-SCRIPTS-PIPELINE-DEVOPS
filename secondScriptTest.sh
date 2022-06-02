@@ -1,5 +1,5 @@
 #! /bin/sh
-# file: scriptTests.sh
+# file: secondScriptTest.sh
 FULLPATH=$(pwd)
 
 testFirstScript() {
