@@ -14,6 +14,7 @@ jobs:
 
     - name: Tests setup
       run: |
+        mkdir -p "/tmp/backup_script2/"
         touch "/tmp/backup_script2/prueba.txt"
     
     - name: Generate Shell Script Unit Testing
