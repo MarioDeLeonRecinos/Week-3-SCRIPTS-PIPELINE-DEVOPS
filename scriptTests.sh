@@ -1,7 +1,6 @@
 #! /bin/sh
 # file: scriptTests.sh
 FULLPATH=$(pwd)
-touch "/tmp/backup_script2/prueba.txt"
 
 #chmod -R 755 "${FULLPATH}/scripts"
 testFirstScript() {
