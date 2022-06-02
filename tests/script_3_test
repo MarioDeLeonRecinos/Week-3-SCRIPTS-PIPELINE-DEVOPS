@@ -6,9 +6,11 @@
 script_main() {
     if [ "$CREATE" = "0" ]; then
         #Tested in the run htpasswd and works but in test command not found
-        $(echo "htpasswd -b ".htpasswd" "${USER}" "${PASSWORD}"")
+        #htpasswd -b ".htpasswd" "${USER}" "${PASSWORD}"
+        echo "run command create update"
     else
-        $(echo "htpasswd -D ".htpasswd" "${USER}"")
+        #htpasswd -D ".htpasswd" "${USER}"
+        echo "run command delte"
     fi
 }
 
