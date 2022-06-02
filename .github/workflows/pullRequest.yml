@@ -15,7 +15,6 @@ jobs:
     - name: Tests setup
       run: |
         touch prueba.txt
-        ls /tmp/backup_script2
         chmod 777 prueba.txt
     
     - name: Generate Shell Script Unit Testing
