@@ -5,9 +5,9 @@
 #logic for the script_3 and the respective function call needed
 script_main() {
     if [ "$CREATE" = "0" ]; then
-        sudo htpasswd -b ".htpasswd" "${USER}" "${PASSWORD}"
+        $(htpasswd -b ".htpasswd" "${USER}" "${PASSWORD}")
     else
-        sudo htpasswd -D ".htpasswd" "${USER}"
+        $(htpasswd -D ".htpasswd" "${USER}")
     fi
 }
 
