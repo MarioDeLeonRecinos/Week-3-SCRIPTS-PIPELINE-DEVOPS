@@ -3,7 +3,7 @@
 # Script for the backup of files from a directory with the date format yyyy-mm-dd hh:ss:mm in the destination /tmp/backup_script2
 
 #File name and directory with the txt saved for the names of the files to backup
-filename="prueba.txt"
+filename="./prueba.txt"
 
 #script used to make the backup automatic when there is a cron call
 script_main_automatic() {
