@@ -23,12 +23,7 @@ jobs:
     - name: Generate Shell Script Unit Testing First Script
       uses: sudo-bot/action-shunit2@latest
       with:
-        cli: "./firstScriptTest.sh"
-    
-    - name: Generate Shell Script Unit Testing Second Script
-      uses: sudo-bot/action-shunit2@latest
-      with:
-        cli: "./secondScriptTest.sh"
+        cli: "./scriptTest.sh"
 
     - uses: repo-sync/pull-request@v2
       name: pull-request
