@@ -12,11 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Generate Shell Script Unit Testing
-        uses: sudo-bot/action-shunit2@latest
-        with:
-          cli: "./scriptTests.sh"
-
       - name: SSH conection remove directory and remake it
         uses: appleboy/ssh-action@master
         with:
