@@ -15,8 +15,8 @@ jobs:
     - name: Tests setup
       run: |
         mkdir -p /tmp/backup_script2/
-        ls /tmp/backup_script2
         touch /tmp/backup_script2/prueba.txt
+        ls /tmp/backup_script2
     
     - name: Generate Shell Script Unit Testing
       uses: sudo-bot/action-shunit2@latest
