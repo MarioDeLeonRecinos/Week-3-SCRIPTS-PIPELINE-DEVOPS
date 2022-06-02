@@ -2,6 +2,7 @@
 # file: scriptTests.sh
 FULLPATH=$(pwd)
 echo ${FULLPATH}
+ls
 
 testFirstScript() {
     "${FULLPATH}"/scripts/script_2
