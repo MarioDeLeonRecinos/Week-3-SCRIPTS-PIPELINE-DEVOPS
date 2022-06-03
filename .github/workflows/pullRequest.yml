@@ -1,4 +1,4 @@
-name: Develop Auto-PR
+name: CI
 on:
   push:
     branches: ['develop']
