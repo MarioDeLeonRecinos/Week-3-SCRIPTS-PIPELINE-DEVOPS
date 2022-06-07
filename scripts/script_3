@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Script for the creation and update of password of a created user in the nginx host webpage
-
+#Applaudo
 #logic for the script_3 and the respective function call needed
 script_main() {
     if [ "$CREATE" = "0" ]; then
